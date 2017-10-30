@@ -1,0 +1,14 @@
+body {
+    background-color: #CCC;
+}
+#topbar {
+    text-align: right;
+}
+
+.redtext {
+    color: red;
+}
+
+.greentext {
+    color: green;
+}
