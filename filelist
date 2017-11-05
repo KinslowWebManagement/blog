@@ -1,0 +1,19 @@
+total 68
+-rwxrwxrwx 1 root   root   2824 Nov  1 17:30 app.php
+-rwxrwxrwx 1 root   root    980 Oct 31 06:14 config.php
+-rwxrwxrwx 1 root   root   2044 Oct 31 06:12 create_post.php
+-rwxrwxrwx 1 kinslj kinslj  976 Oct 30 17:31 db.php
+-rw-r----- 1 root   root      0 Nov  2 19:41 del_comment.php
+-rwxrwxrwx 1 root   root    523 Oct 31 06:12 del_post.php
+-rwxrwxrwx 1 kinslj kinslj 2311 Oct 31 06:12 edit_post.php
+-rw-r--r-- 1 root   root      0 Nov  5 01:19 filelist
+drwxrwxrwx 8 root   root   4096 Nov  5 01:15 .git
+-rw-r--r-- 1 root   root      6 Nov  5 01:14 .gitignore
+-rwxrwxrwx 1 root   root   3375 Oct 31 12:17 index.php
+-rwxrwxrwx 1 root   root   1993 Nov  1 17:33 login.php
+-rwxrwxrwx 1 root   root    168 Oct 31 06:12 logout.php
+drwxrwxrwx 6 root   root   4096 Oct 31 08:50 nbbc
+-rwxrwxrwx 1 root   root   1364 Nov  1 17:34 signup.php
+drwxrwxrwx 2 root   root   4096 Oct 30 09:44 smileys
+drwxrwxrwx 2 root   root   4096 Oct 30 09:44 styles
+-rwxrwxrwx 1 root   root   5270 Nov  2 04:19 view_post.php
