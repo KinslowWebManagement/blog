@@ -5,6 +5,10 @@ body {
     text-align: right;
 }
 
+#content {
+    margin: auto;
+}
+
 .redtext {
     color: red;
 }

@@ -6,7 +6,7 @@
  * Time: 7:46 AM
  */
     session_start();
-    include_once('db.php');
+    include_once('config.php');
 
     if (!isset($_SESSION['username']) || !isset($_SESSION['admin']) || $_SESSION['admin'] < 4){
         header('Location: index.php');

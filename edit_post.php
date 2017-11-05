@@ -7,7 +7,7 @@
  */
 
     session_start();
-    include_once('db.php');
+    include_once('config.php');
 
     if (!isset($_SESSION['username']) || !isset($_SESSION['admin']) || $_SESSION['admin'] < 4){
         header('Location: index.php');
@@ -41,6 +41,7 @@
 <html>
 <head>
     <title>Blog - Edit</title>
+    <?php echo $embed; ?>
     <link rel="stylesheet" type="text/css" href="styles/main.css" />
 </head>
 <body>
@@ -77,8 +78,8 @@
 
     ?>
 <form method="POST" action="edit_post.php?pid=<?php echo $pid; ?>">
-    <input type="text" name="title" placeholder="Title" value="<?php echo $title; ?>" /><br />
-    <textarea name="content" placeholder="Content" rows="20" cols="50"><?php echo $content; ?></textarea><br />
+    <input type="text" name="title" placeholder="Title" class="form-control" value="<?php echo $title; ?>" /><br />
+    <textarea name="content" placeholder="Content" rows="12" class="form-control"><?php echo $content; ?></textarea><br />
     <input type="submit" name="editpost" value="Edit Post" />
 </form>
 </body>

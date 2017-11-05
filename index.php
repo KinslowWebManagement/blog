@@ -1,9 +1,9 @@
 <?php
 
-    ini_set('display_errors', 'On');
+    //ini_set('display_errors', 'On');
 
     session_start();
-    include_once('db.php');
+    include_once('config.php');
 
 
 ?>
@@ -11,11 +11,14 @@
 <html>
 <head>
 <title>Blog</title>
+    <?php echo $embed; ?>
     <link rel="stylesheet" type="text/css" href="styles/main.css" />
 </head>
 <body>
 <hr />
-<div id="topbar">
+<div class="container-fluid">
+    <div class="row">
+<div id="topbar" class="col-sm-12">
     <?php
         if(isset($_SESSION['username'])){
             $user = $_SESSION['username'];
@@ -26,8 +29,10 @@
         }
     ?>
 </div>
+    </div>
 <hr />
-<div id="nav">
+    <div class="row">
+<div id="nav" class="col-sm-12">
     <a href="index.php">Home</a>&nbsp;|&nbsp;
     <?php
         if (isset($_SESSION['admin']) && $_SESSION['admin'] > 3){
@@ -35,10 +40,27 @@
         }
     ?>
 </div>
+    </div>
+    <div class="row">
+        <div id="content" class="col-sm-12" align="center">
 <?php
     require_once("nbbc/nbbc.php");
 
     $nbbc = new BBCode();
+
+    $nbbc->RemoveRule('img');
+
+    $nbbc->AddRule('img',  Array(
+        'mode' => BBCODE_MODE_ENHANCED,
+        'template' => '<img class="img-fluid" src="{$_content}" />',
+        'class' => 'block',
+        'allow_in' => Array('listitem', 'block', 'columns'),
+    ));
+    $nbbc->AddRule('hr',  Array(
+        'simple_start' => '<hr style="border-width:3px;" />',
+        'class' => 'inline',
+        'allow_in' => Array('listitem', 'block', 'columns', 'inline', 'link'),
+    ));
 
     $sql = "SELECT * FROM posts ORDER BY id DESC";
 
@@ -66,7 +88,7 @@
             }
 
             if (isset($_SESSION['admin']) && $_SESSION['admin'] > 5 && $_SESSION['username'] == $posterName){
-                $admin = "<div><a href='del_post.php?pid=$id'>Delete</a>&nbsp;|&nbsp;<a href='edit_post.php?pid=$id'>Edit</a></div>";
+                $admin = "<div align='center'><a href='del_post.php?pid=$id'>Delete</a>&nbsp;|&nbsp;<a href='edit_post.php?pid=$id'>Edit</a></div>";
             }
             else{
                 $admin = "";
@@ -74,7 +96,7 @@
 
             $output = $nbbc->Parse($content);
 
-            $posts .= "<hr /><div><h2><a href='view_post.php?pid=$id'>$title</a></h2><h3>$posterName - $date</h3><p>$output</p>$admin</div>";
+            $posts .= "<hr /><div align='left'><h2 align='center'><a href='view_post.php?pid=$id'>$title</a></h2><h3 align='center'>$posterName - $date</h3><p>$output</p>$admin</div>";
         }
         $posts .= "<hr />";
         echo $posts;
@@ -89,5 +111,8 @@
 //        echo "<div><a href='create_post.php'>Create a new post!</a></div>";
 //    }
 ?>
+        </div>
+    </div>
+</div>
 </body>
 </html>
