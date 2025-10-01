@@ -1,18 +1,21 @@
 <?php
 
     session_start();
-    include_once('db.php');
+    include_once('config.php');
 
     if (isset($_POST['signin'])){
         $user = $_POST['username'];
         $pass = $_POST['password'];
 
+        $userSanitized = mysqli_real_escape_string($db, $user);
+        $passSanitized = mysqli_real_escape_string($db, $pass);
+
         if (empty($user) || empty($pass)){
             echo "<p class='redtext'>ERROR: You may not enter an empty username or password</p>";
         }
         else {
-            $hashedPass = md5($pass);
-            $sql = "SELECT * FROM users WHERE username = '$user' AND password='$hashedPass'";
+            $hashedPass = md5($passSanitized);
+            $sql = "SELECT * FROM users WHERE username = '$userSanitized' AND password='$hashedPass'";
 
             $res = mysqli_query($db, $sql);
 
@@ -42,10 +45,11 @@
 <head>
     <meta charset="utf8">
     <title>Blog - Login</title>
+    <?php echo $embed; ?>
     <link rel="stylesheet" type="text/css" href="styles/main.css" />
 </head>
 <body>
-
+    <div class="center-block">
     <p>Don't already have an account? Create one <a href="signup.php">here</a>.</p>
 
     <form method="POST">
@@ -53,6 +57,6 @@
         <input type="password" placeholder="Password" name="password" /><br />
         <input name="signin" type="submit" value="Login" />
     </form>
-
+    </div>
 </body>
-</html>
+</html>	

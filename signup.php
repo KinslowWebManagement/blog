@@ -7,7 +7,7 @@
  */
     //ini_set('display_errors', 'On');
     session_start();
-    include_once('db.php');
+    include_once('config.php');
 
     if(isset($_SESSION['username'])){
         header('Location: index.php');
@@ -16,8 +16,11 @@
     if (isset($_POST['createuser'])){
         $user = $_POST['username'];
         $pass = $_POST['password'];
-        $hashedPass = md5($pass);
-        $sql = "INSERT INTO users (username, password) VALUES ('$user', '$hashedPass')";;
+        $userSanitized = mysqli_real_escape_string($db, $user);
+        $passSanitized = mysqli_real_escape_string($db, $pass);
+        
+        $hashedPass = md5($passSanitized);
+        $sql = "INSERT INTO users (username, password) VALUES ('$userSanitized', '$hashedPass')";;
         mysqli_query($db, $sql);
         $_SESSION['username'] = $user;
         header('Location: index.php');
@@ -30,6 +33,7 @@
 <head>
     <meta charset="utf8">
     <title>Blog - Login</title>
+    <?php echo $embed; ?>
     <link rel="stylesheet" type="text/css" href="styles/main.css" />
 </head>
 <body>

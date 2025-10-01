@@ -6,7 +6,7 @@
  * Time: 6:45 AM
  */
 session_start();
-include_once('db.php');
+include_once('config.php');
 if (!isset($_SESSION['username']) || !isset($_SESSION['admin']) || $_SESSION['admin'] < 4) {
     header('Location: index.php');
 }
@@ -40,6 +40,7 @@ if (isset($_POST['newpost'])){
 <html>
 <head>
     <title>Blog - New Post</title>
+    <?php echo $embed; ?>
     <link rel="stylesheet" type="text/css" href="styles/main.css" />
 </head>
 <body>
@@ -66,8 +67,8 @@ if (isset($_POST['newpost'])){
 </div>
 <hr />
 <form method="POST">
-    <input name="title" type="text" placeholder="Title" /><br />
-    <textarea name="content" placeholder="Content" rows="20" cols="50"></textarea><br />
+    <input name="title" type="text" placeholder="Title" class="form-control" /><br />
+    <textarea name="content" placeholder="Content" rows="12" class="form-control"></textarea><br />
     <input type="submit" name="newpost" value="Create Post" />
 </form>
 </body>
